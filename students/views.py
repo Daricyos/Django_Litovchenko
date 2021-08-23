@@ -1,9 +1,12 @@
 from random import randrange
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
 
 from faker import Faker
 
+from .forms import StudentForm
 from .models import Student
 
 
@@ -50,3 +53,15 @@ def generate_students(request, student_number=100):
         students_get = Student.objects.filter().order_by('-id')[:student_number]
         output = [f"{student.id} {student.first_name} {student.last_name}, {student.age}; \n" for student in students_get]
         return HttpResponse(output, content_type="text/plain")
+
+
+def create_student(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            Student.objects.create(**form.cleaned_data)
+            return HttpResponseRedirect(reverse('list-students'))
+    else:
+        form = StudentForm()
+
+    return render(request, 'create_student_form.html', {'form': form})

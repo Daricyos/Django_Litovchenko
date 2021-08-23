@@ -1,10 +1,18 @@
 from random import randrange
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
 
 from faker import Faker
 
+from .forms import TeacherForm
 from .models import Teacher
+
+
+def list_teacher(request):
+    teacher_list = list(Teacher.objects.values().all())
+    return HttpResponse(teacher_list)
 
 
 def generate_teacher(request, teacher_number=100):
@@ -36,3 +44,15 @@ def get_teacher(request):
 
         output = [f"{teacher.first_name} {teacher.last_name}, {teacher.age}; " for teacher in teachers]
         return HttpResponse(output)
+
+
+def create_teacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            Teacher.objects.create(**form.cleaned_data)
+            return HttpResponseRedirect(reverse('list-teacher'))
+    else:
+        form = TeacherForm()
+
+    return render(request, 'create_teacher_form.html', {'form': form})
