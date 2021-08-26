@@ -27,8 +27,8 @@ def group_db(request, group_number=10):
 
 
 def list_group(request):
-    group_list = list(Groups.objects.values().all())
-    return HttpResponse(group_list)
+    group_list = Groups.objects.all()
+    return render(request, 'groups_list.html', {'group': group_list})
 
 
 def create_groups(request):
