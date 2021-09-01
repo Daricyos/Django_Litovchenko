@@ -1,5 +1,6 @@
 from random import randrange
 
+from django.forms.models import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -29,8 +30,8 @@ def one_students(request):
 
 
 def list_students(request):
-    students_list = list(Student.objects.values().all())
-    return HttpResponse(students_list)
+    students_list = Student.objects.all()
+    return render(request, 'students_list.html', {'students': students_list})
 
 
 def generate_students(request, student_number=100):
@@ -65,3 +66,22 @@ def create_student(request):
         form = StudentForm()
 
     return render(request, 'create_student_form.html', {'form': form})
+
+
+def edit_student(request, student_id):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            Student.objects.update_or_create(defaults=form.cleaned_data, id=student_id)
+            return HttpResponseRedirect(reverse('list-students'))
+    else:
+        student = Student.objects.filter(id=student_id).first()
+        form = StudentForm(model_to_dict(student))
+
+    return render(request, 'students_edit_form.html', {'form': form, 'student_id': student_id})
+
+
+def delete_student(request, student_id):
+    student = Student.objects.filter(id=student_id)
+    student.delete()
+    return HttpResponseRedirect(reverse('list-students'))

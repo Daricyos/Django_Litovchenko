@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ block.super }}
+    <style type="text/css">
+        body { background-color: aqua; }
+
+        h1 { margin-left: 3%; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Groups List</h1>
+    <ul>
+        {% for groups in group %}
+        <li>
+            {{ groups.id|safe }}. {{ groups.group_name|safe }}, students {{ groups.group_student|safe }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
