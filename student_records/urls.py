@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include('students.urls')),
     path('', include('teacher.urls')),
     path('', include('group.urls')),
+    path('', include('sending_email.urls')),
 ]

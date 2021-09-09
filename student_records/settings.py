@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from celery.schedules import crontab
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'students',
     'group',
-    'teacher'
+    'teacher',
+    'sending_email'
 ]
 
 MIDDLEWARE = [
@@ -92,12 +95,34 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CELERY_BROKER_URL = 'pyamqp://guest@localhost//'
+ELERY_TIMEZONE = "Europe/Kiev"
+CELERY_TASK_TRACK_STARTED = True
+
+
+# Планировщик сельдерея
+CELERY_BEAT_SCHEDULE = {
+    'beat_delete_logs': {
+        'task': 'students.tasks.delete_logs',
+        'schedule': crontab(minute=0, hour=5),
+    }
+}
+
+# Sending e-mail settings
+ADMINS_EMAIL = ['vitalik1996@gmail.com', 'djangolitovchenko@gmail.com']
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'djangolitovchenko@gmail.com'
+EMAIL_HOST_PASSWORD = 'zippok19971'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
