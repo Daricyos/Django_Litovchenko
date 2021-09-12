@@ -1,3 +1,6 @@
+import os
+import dj_database_url
+
 from pathlib import Path
 
 from celery.schedules import crontab
@@ -10,12 +13,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c5is3syg-*hojbohdz@_6#8)nr$t)h@a@ib@n21j2*=9#kz%#+'
+#SECRET_KEY = 'django-insecure-c5is3syg-*hojbohdz@_6#8)nr$t)h@a@ib@n21j2*=9#kz%#+'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+
+CSRF_COOKIE_SECURE = bool(os.environ.get('CSRF_COOKIE_SECURE', True))
 
 ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -33,8 +41,19 @@ INSTALLED_APPS = [
     'sending_email'
 ]
 
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,6 +93,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Heroku: Update database configuration from $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
