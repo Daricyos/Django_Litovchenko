@@ -1,9 +1,10 @@
 import os
-import dj_database_url
-
 from pathlib import Path
 
 from celery.schedules import crontab
+
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,18 +14,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-c5is3syg-*hojbohdz@_6#8)nr$t)h@a@ib@n21j2*=9#kz%#+'
+# SECRET_KEY = 'django-insecure-c5is3syg-*hojbohdz@_6#8)nr$t)h@a@ib@n21j2*=9#kz%#+'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
+# DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 CSRF_COOKIE_SECURE = bool(os.environ.get('CSRF_COOKIE_SECURE', True))
 
 ALLOWED_HOSTS = []
-
-
 
 # Application definition
 
