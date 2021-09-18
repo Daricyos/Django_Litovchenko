@@ -1,4 +1,4 @@
-from random import randrange
+from random import randrange # noqa
 
 from django.core.management.base import BaseCommand, CommandError # noqa
 
@@ -12,7 +12,8 @@ from teacher.models import Teacher
 
 
 teacher_subjects = ['English', 'Math', 'Physics', 'Computer science', 'History', 'Geography', 'Geometry', 'Japanese']
-    
+
+
 class Command(BaseCommand):
     help = 'Genereates random teacher base on input amount' # noqa
 

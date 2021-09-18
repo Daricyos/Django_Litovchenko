@@ -10,11 +10,9 @@ class StudentAdmin(admin.ModelAdmin):
     list_filter = ("age", "last_name")
     search_fields = ("last_name__startswith", "first_name__startswith")
 
-
     def group_id(self, obj):
         return f"Group ID: {obj.in_group.id}"
     group_id.short_description = 'Group ID'
-
 
     def group_name(self, obj):
         return obj.in_group.group_name

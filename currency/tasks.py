@@ -2,8 +2,8 @@ from celery import shared_task
 
 import requests
 
-from .models import Exchange
 from .choices import CURRENCIES
+from .models import Exchange
 
 
 @shared_task

@@ -1,9 +1,9 @@
 from django.urls import path
 
 from group.views import (
+    all_groups,
     create_groups,
     group_db,
-    all_groups,
 )
 
 urlpatterns = [

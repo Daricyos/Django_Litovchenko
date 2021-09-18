@@ -1,5 +1,5 @@
 CURRENCIES = [
-	('USD', 'US Dollar'),
-	('EUR', 'Euro'),
-	('RUR', 'Ruble')
+    ('USD', 'US Dollar'),
+    ('EUR', 'Euro'),
+    ('RUR', 'Ruble')
 ]

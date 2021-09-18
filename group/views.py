@@ -50,4 +50,4 @@ def all_groups(request):
         filter_params['group_name'] = group_name
 
     group_list = Groups.objects.filter(**filter_params)
-    return render(request, 'groups_list.html', {'groups':group_list})
+    return render(request, 'groups_list.html', {'groups': group_list})
