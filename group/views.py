@@ -26,18 +26,28 @@ def group_db(request, group_number=10):
     return HttpResponse(output, content_type="text/plain")
 
 
-def list_group(request):
-    group_list = Groups.objects.all()
-    return render(request, 'groups_list.html', {'group': group_list})
-
-
 def create_groups(request):
     if request.method == 'POST':
         form = GroupsForm(request.POST)
+
         if form.is_valid():
             Groups.objects.create(**form.cleaned_data)
             return HttpResponseRedirect(reverse('list-groups'))
+
     else:
         form = GroupsForm()
 
     return render(request, 'create_group_form.html', {'form': form})
+
+
+def all_groups(request):
+    filter_params = {}
+    group_id = request.GET.get('id', '')
+    if group_id:
+        filter_params['id'] = group_id
+    group_name = request.GET.get('group_name', '')
+    if group_name:
+        filter_params['group_name'] = group_name
+
+    group_list = Groups.objects.filter(**filter_params)
+    return render(request, 'groups_list.html', {'groups':group_list})

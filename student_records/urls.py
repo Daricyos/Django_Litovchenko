@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('teacher.urls')),
     path('', include('group.urls')),
     path('', include('sending_email.urls')),
+    path('', include('currency.urls')),
 ]
