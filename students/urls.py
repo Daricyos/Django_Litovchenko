@@ -1,6 +1,7 @@
 from django.urls import path
 
 from students.views import (
+    hello,
     create_student,
     delete_student,
     edit_student,
@@ -10,6 +11,7 @@ from students.views import (
 )
 
 urlpatterns = [
+    path('', hello),
     path('list_students/', list_students, name='list-students'),
     path('one_students/', one_students, name='one-students'),
     path('generate_students/<int:student_number>', generate_students, name='generate-students'),
