@@ -12,7 +12,7 @@
     <ul>
         {% for teacher in teacher %}
         <li>
-            {{ teacher.id|safe }}. {{ teacher.first_name|safe }} {{ teacher.last_name|safe }}, age {{teacher.age|safe }}
+            {{ teacher.id|safe }}, {{ teacher.subject }},  {{ teacher.first_name|safe }} {{ teacher.last_name|safe }}, age {{teacher.age|safe }}
             <a href="{% url 'edit-teacher' teacher.id %}">Edit</a>
             <a href="{% url 'delete-teacher' teacher.id %}">Delete</a>
         </li>

@@ -2,7 +2,7 @@ from random import randrange
 
 from django.forms.models import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from faker import Faker
@@ -73,7 +73,7 @@ def edit_student(request, student_id):
         form = StudentForm(request.POST)
         if form.is_valid():
             Student.objects.update_or_create(defaults=form.cleaned_data, id=student_id)
-            return HttpResponseRedirect(reverse('list-students'))
+            return redirect('list-students')
     else:
         student = Student.objects.filter(id=student_id).first()
         form = StudentForm(model_to_dict(student))
