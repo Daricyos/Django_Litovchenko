@@ -13,3 +13,7 @@ urlpatterns = [
     path('', include('sending_email.urls')),
     path('', include('currency.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+handler404 = 'students.views.error404'
+handler500 = 'students.views.error500'

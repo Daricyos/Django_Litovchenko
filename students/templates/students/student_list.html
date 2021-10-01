@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block head %}
+    <title>All Students</title>
+    {{ block.super }}
+{% endblock %}
+{% block content %}
+    <table>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Age</th>
+        <th>Phone number</th>
+        <th>Group ID</th>
+        <th>Group name</th>
+        <th>Edit data</th>
+        <th>Delete from base</th>
+        {% for student in student_list %}
+            <tr>
+                <td>{{ student.id|safe }}</td>
+                <td>{{ student.first_name|safe }}</td>
+                <td>{{ student.last_name|safe }}</td>
+                <td>{{student.age|safe }}</td>
+                <td>{{ student.phone|safe }}</td>
+                <td>{{ student.in_group.id }}</td>
+                <td>{{ student.in_group.group_name }}</td>
+                <td>
+                    <a href="{% url 'edit-student' student.id %}">Edit</a>
+                </td>
+                <td><a href="{% url 'delete-student' student.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

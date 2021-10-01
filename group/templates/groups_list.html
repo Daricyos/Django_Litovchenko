@@ -35,8 +35,7 @@
         <th>Students in group</th>
         <th>Group curator</th>
         <th>Group headman</th>
-
-        {% for group in groups %}
+        {% for group in groups_list %}
             <tr>
                 <td>{{ group.id|safe }}</td>
                 <td>{{ group.group_name|safe }}</td>

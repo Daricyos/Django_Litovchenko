@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 {% block head %}
+    <title>All Teachers</title>
     {{ block.super }}
-    <style type="text/css">
-        ul {list-style: none;}
-    </style>
 {% endblock %}
 {% block content %}
-    <h1>Teachers List</h1>
-    <ul>
-        {% for teacher in teacher %}
-        <li>
-            {{ teacher.id|safe }}, {{ teacher.subject }},  {{ teacher.first_name|safe }} {{ teacher.last_name|safe }}, age {{teacher.age|safe }}
-            <a href="{% url 'edit-teacher' teacher.id %}">Edit</a>
-            <a href="{% url 'delete-teacher' teacher.id %}">Delete</a>
-        </li>
+    <table>
+        <th>ID</th>
+        <th>Subject</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Age</th>
+        <th>Edit data</th>
+        <th>Delete from base</th>
+        {% for teacher in teacher_list %}
+            <tr>
+                <td>{{ teacher.id|safe }}</td>
+                <td>{{ teacher.subject }}</td>
+                <td>{{ teacher.first_name|safe }}</td>
+                <td>{{ teacher.last_name|safe }}</td>
+                <td>{{ teacher.age|safe }}</td>
+                <td><a href="{% url 'edit-teacher' teacher.id %}">Edit</a></td>
+                <td><a href="{% url 'delete-teacher' teacher.id %}">Delete</a></td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
