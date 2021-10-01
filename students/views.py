@@ -11,6 +11,10 @@ from .forms import StudentForm
 from .models import Student
 
 
+def hello(request):
+    return render(request, 'index.html')
+
+
 def one_students(request):
     fake = Faker()
     resul = []

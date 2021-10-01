@@ -5,11 +5,13 @@ from students.views import (
     delete_student,
     edit_student,
     generate_students,
+    hello,
     list_students,
     one_students,
 )
 
 urlpatterns = [
+    path('', hello),
     path('list_students/', list_students, name='list-students'),
     path('one_students/', one_students, name='one-students'),
     path('generate_students/<int:student_number>', generate_students, name='generate-students'),

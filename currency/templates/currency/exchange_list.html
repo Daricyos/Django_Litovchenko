@@ -1,24 +1,36 @@
 {% extends "base.html" %}
+{% load static %}
 {% block head %}
     {{ block.super }}
     <title>Exchange list</title>
-
+    <style type="text/css">
+        table {
+            text-align: center;
+            display: block;
+        }
+    </style>
 {% endblock %}
 {% block content %}
-    <table>
-        <th>Exchange date</th>
-        <th>Currency</th>
-        <th>Source</th>
-        <th>Buy price</th>
-        <th>Sell price</th>
-        {% for currency in exchange_list %}
+    <table class="table table-striped-sm">
+        <thead>
             <tr>
-                <td>{{ currency.created_at|date:'d.m.Y - H:m:s'}}</td>
-                <td>{{ currency.currency|safe }}</td>
-                <td>{{ currency.source|safe }}</td>
-                <td>{{ currency.buy_price|safe }}</td>
-                <td>{{ currency.sell_price|safe }}</td>
+                <th scope="col">Exchange date</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Source</th>
+                <th scope="col">Buy price</th>
+                <th scope="col">Sell price</th>
             </tr>
+        </thead>
+        {% for currency in exchange_list %}
+            <tbody>
+                <tr>
+                    <td>{{ currency.created_at|date:'d.m.Y - H:m:s'}}</td>
+                    <td>{{ currency.currency|safe }}</td>
+                    <td>{{ currency.source|safe }}</td>
+                    <td>{{ currency.buy_price|safe }}</td>
+                    <td>{{ currency.sell_price|safe }}</td>
+                </tr>
+            </tbody>
         {% endfor %}
     </table>
 {% endblock %}
