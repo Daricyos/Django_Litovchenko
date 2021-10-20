@@ -22,6 +22,7 @@ def test_user_create():
 def test_get_student_list():
     Client().get("/list_students")
     assert Student.objects.count() == 0
+    
 
 @pytest.mark.urls('student_records.urls')
 def test_hello_list(client):
