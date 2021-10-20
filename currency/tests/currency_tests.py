@@ -1,7 +1,5 @@
 import pytest
 
-import requests
-
 from ..models import Exchange
 from ..tasks import get_currency_rates
 

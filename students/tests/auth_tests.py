@@ -1,15 +1,15 @@
 from datetime import datetime, timedelta
+
+from django.contrib.auth.models import User
+from django.forms.models import model_to_dict
+from django.test import Client
+
 import pytest
 
 from pytz import timezone
 
-from django.contrib.auth.models import User
-from django.test import Client
-from django.forms.models import model_to_dict
-
+from ..models import Logger, Student
 from ..tasks import delete_logs
-from ..models import Student, Logger
-from ..forms import StudentForm
 
 
 @pytest.mark.django_db
@@ -33,10 +33,10 @@ def test_hello_list():
 @pytest.mark.django_db
 def test_create_adn_delete_student():
     Client().post("/create_student", data={'first_name': 'Maksym',
-                                            'last_name': 'Petrenko',
-                                            'age': 18,
-                                            'phone': 380633911778,
-                                        })
+                                           'last_name': 'Petrenko',
+                                           'age': 18,
+                                           'phone': 380633911778,
+                                           })
     assert Student.objects.count() == 1
     student = Student.objects.last()
     student.delete()
@@ -48,18 +48,18 @@ def test_edit_student():
     Client().get('/generate_students/1')
     assert Student.objects.count() == 1
 
-    Client().post('/edit_student/1/', data= {'first_name': 'Vova',
+    Client().post('/edit_student/1/', data={'first_name': 'Vova',
                                             'last_name': 'Ivanov',
                                             'age': 28,
                                             'phone': 380999999999,
-                                        })
-    assert model_to_dict(Student.objects.get(id=1)) == {'id': 1, 
+                                            })
+    assert model_to_dict(Student.objects.get(id=1)) == {'id': 1,
                                                         'first_name': 'Vova',
                                                         'last_name': 'Ivanov',
                                                         'age': 28,
                                                         'phone': 380999999999,
                                                         'in_group': None,
-                                                    }
+                                                        }
     assert 'Vova' in Student.objects.last().__str__()
     p = Student.objects.last()
     p.phone = +380633911844

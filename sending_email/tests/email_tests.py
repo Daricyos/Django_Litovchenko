@@ -1,12 +1,13 @@
+from django.core.mail import send_mail
+
 import pytest
 
 from ..forms import ContactUsForm
-from django.core.mail import send_mail
 
 
 @pytest.mark.django_db
 def test_email_form():
-    forms = ContactUsForm(data = {
+    forms = ContactUsForm(data={
         'contact_name': 'Maksym',
         'title': 'Test',
         'message': 'Hello World',

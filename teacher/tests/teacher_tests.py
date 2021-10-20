@@ -15,9 +15,9 @@ def test_get_teacher():
 @pytest.mark.django_db
 def test_create_teacher():
     Client().post("/create_teacher", data={'first_name': 'Maksim',
-                                            'last_name': 'Ivanov',
-                                            'age': 75
-                                            })
+                                           'last_name': 'Ivanov',
+                                           'age': 75
+                                           })
     assert Teacher.objects.count() == 1
     assert 'Maksim' in Teacher.objects.last().__str__()
 
@@ -31,7 +31,7 @@ def test_generate_and_edit_teacher():
                                             'last_name': 'Popkova',
                                             'age': 23,
                                             })
-    assert model_to_dict(Teacher.objects.get(id=1)) == {'id': 1,'subject': '', 'first_name': 'Lena', 'last_name': 'Popkova', 'age': 23}
+    assert model_to_dict(Teacher.objects.get(id=1)) == {'id': 1, 'subject': '', 'first_name': 'Lena', 'last_name': 'Popkova', 'age': 23}
     assert 'Lena' in Teacher.objects.last().__str__()
 
 
