@@ -23,9 +23,9 @@ def test_get_student_list():
     Client().get("/list_students")
     assert Student.objects.count() == 0
 
-
-def test_hello_list():
-    response = Client().get('/')
+@pytest.mark.urls('student_records.urls')
+def test_hello_list(client):
+    response = client.get('')
     assert response.status_code == 200
     assert '<a href="/list_students/"><li>List students</li></a>' in response.content.decode()
 
