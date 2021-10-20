@@ -25,7 +25,7 @@ def test_get_student_list():
 
 
 def test_hello_list():
-    response = Client().get('')
+    response = Client().get('/')
     assert response.status_code == 200
     assert '<a href="/list_students/"><li>List students</li></a>' in response.content.decode()
 
