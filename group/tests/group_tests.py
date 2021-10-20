@@ -7,7 +7,7 @@ from ..models import Groups
 
 @pytest.mark.django_db
 def test_get_groups():
-    Client().get('/list-group/')
+    Client().get('/list-group')
     assert Groups.objects.count() == 0
 
 
