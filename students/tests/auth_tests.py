@@ -30,8 +30,6 @@ def test_get_student_list():
 def test_hello_list(client):
     response = client.get('')
     assert response.status_code == 200
-    assert 'Navigation' in response.content.decode()
-    assertTemplateUsed(response, 'index.html')
 
 
 @pytest.mark.django_db
