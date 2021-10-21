@@ -6,6 +6,8 @@ from django.test import Client
 
 import pytest
 
+from pytest_django.asserts import assertTemplateUsed
+
 from pytz import timezone
 
 from ..models import Logger, Student
@@ -29,6 +31,7 @@ def test_hello_list(client):
     response = client.get('')
     assert response.status_code == 200
     assert 'Navigation' in response.content.decode()
+    assertTemplateUsed(response, 'index.html')
 
 
 @pytest.mark.django_db
