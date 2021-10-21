@@ -28,7 +28,7 @@ def test_get_student_list():
 
 @pytest.mark.urls('student_records.urls')
 def test_hello_list(client):
-    response = client.get('')
+    response = client.get('/')
     assert response.status_code == 200
 
 
