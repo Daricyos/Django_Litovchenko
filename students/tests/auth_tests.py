@@ -6,7 +6,6 @@ from django.test import Client
 
 import pytest
 
-from pytest_django.asserts import assertTemplateUsed
 
 from pytz import timezone
 
