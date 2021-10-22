@@ -69,9 +69,9 @@ def test_edit_student():
     assert Student.objects.last().phone == 380633911844
 
 
-def test_error_404():
-    response = Client().get("/students404error/")
-    assert response.status_code == 404
+# def test_error_404():
+#     response = Client().get("/students404error/")
+#     assert response.status_code == 404
 
 
 @pytest.mark.django_db
