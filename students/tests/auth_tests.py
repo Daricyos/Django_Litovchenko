@@ -29,7 +29,7 @@ def test_get_student_list():
 def test_main(client):
     response = client.get('')
     assert response.status_code == 200
-    assert 'Navigation' in response.content.decode("utf-8")
+    assert 'Navigation' in response.GET.content.decode("utf-8")
 
 
 @pytest.mark.django_db
