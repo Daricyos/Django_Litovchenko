@@ -12,7 +12,7 @@ from .forms import GroupsForm
 from .models import Groups
 
 
-class GenerateStudentView(View):
+class GenerateGroupsView(View):
     def get(self, request, group_number=10, *args, **kwargs):
         fake = Faker()
         resul = []
