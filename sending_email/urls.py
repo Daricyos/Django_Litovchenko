@@ -1,9 +1,9 @@
 from django.urls import path
 
 from sending_email.views import (
-    show_email_form,
+    ShowEmailFormView,
 )
 
 urlpatterns = [
-    path('email-us/', show_email_form, name='email-us')
+    path('email-us/', ShowEmailFormView.as_view(), name='email-us')
 ]

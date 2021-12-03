@@ -1,13 +1,13 @@
 from django.urls import path
 
 from group.views import (
-    all_groups,
-    create_groups,
-    group_db,
+    CreateGroupsView,
+    GenerateStudentView,
+    GroupsListView,
 )
 
 urlpatterns = [
-    path('group_db/', group_db, name='group-db'),
-    path('create_groups', create_groups, name='create-groups'),
-    path('list-group/', all_groups, name='list-group'),
+    path('group_db/<int:group_number>', GenerateStudentView.as_view(), name='group-db'),
+    path('create_groups', CreateGroupsView.as_view(), name='create-groups'),
+    path('list-group/', GroupsListView.as_view(), name='list-group'),
 ]
